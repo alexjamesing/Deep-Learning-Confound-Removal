@@ -58,12 +58,7 @@ class ConfoundLayer(tf.keras.layers.Layer):
         The function also builds the moving mean and moving standard deviation used to normalise the input data.
         """
       
-        ## self.moving_mean and self.moving_std are used to z-normalise the data-inputs to this, last layer, of the neural network, used in the testing/prediction phase only
-        self.moving_mean = self.add_weight(name = 'moving_mean', shape = [input_shape[0][1],1], initializer='zeros', trainable=False) ## inputs are normalised using: inputs - self.moving_mean
-        self.moving_var = self.add_weight(name = 'moving_std', shape = [input_shape[0][1],1], initializer='ones', trainable=False) ## inputs are
-        
         self.moving_conv2 = self.add_weight(name = 'moving_conv2', shape=[input_shape[1][1]+1, input_shape[1][1]+1], initializer='zeros', trainable=False)
-       
         self.moving_convX = self.add_weight(name = 'moving_convX', shape=[input_shape[1][1]+1, input_shape[0][1]], initializer='zeros', trainable=False)
         
         
@@ -123,12 +118,8 @@ class ConfoundLayer(tf.keras.layers.Layer):
 
         scale_fact = tf.cast(self.tot_num/tf.shape(inputs[0])[0],dtype=float)
 
-        self.moving_mean.assign(tf.expand_dims(tf.math.reduce_mean(inputs[0], axis=0),axis=1))
-        self.moving_var.assign(tf.expand_dims(tf.math.reduce_variance(inputs[0], axis=0),axis=1))
-
         X=inputs[0]
-        #X=tf.divide(tf.subtract(inputs[0],tf.transpose(self.moving_mean)),tf.transpose(tf.math.sqrt(self.moving_var)+self.epsilon))
-
+    
         self.moving_conv2.assign(scale_fact*tf.matmul(tf.transpose(conv),conv))
         self.moving_convX.assign(scale_fact*tf.matmul(tf.transpose(conv),X))  
             
@@ -144,10 +135,6 @@ class ConfoundLayer(tf.keras.layers.Layer):
    
         scale_fact = tf.cast(self.tot_num/tf.shape(inputs[0])[0],dtype=float)
         
-        self.moving_mean.assign(self.momentum*self.moving_mean + (tf.constant(1,dtype=float)-self.momentum)*tf.expand_dims(tf.math.reduce_mean(inputs[0], axis=0),axis=1))
-        self.moving_var.assign(self.momentum*self.moving_var + (tf.constant(1,dtype=float)-self.momentum)*tf.expand_dims(tf.math.reduce_variance(inputs[0], axis=0),axis=1))
-        
-        #X=tf.divide(tf.subtract(inputs[0],tf.transpose(self.moving_mean)),tf.transpose(tf.math.sqrt(self.moving_var)+self.epsilon))
         X=inputs[0]
         conv = inputs[1]
     
