@@ -7,14 +7,7 @@ Created on Wed Jun 14 13:24:12 2023
 """
 
 import tensorflow as tf
-import scipy.io as sio
 import tensorflow.keras as keras
-
-
-import tensorflow as tf
-import scipy.io as sio
-import tensorflow.keras as keras
-
 
 @keras.saving.register_keras_serializable(name="ConfoundLayer")
 class ConfoundLayer(tf.keras.layers.Layer):
@@ -28,7 +21,6 @@ class ConfoundLayer(tf.keras.layers.Layer):
     input[1]: We orthogonlise input[0] with respect to input[1]
     
     """
-    
     
     def __init__(self, tot_num, epsilon=1e-4, momentum=0.95, diag_offset=1e-3, run=0, **kwargs):
         
