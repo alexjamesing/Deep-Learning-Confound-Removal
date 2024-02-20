@@ -84,7 +84,9 @@ class ConfoundLayer(tf.keras.layers.Layer):
      
         if training: 
 
-            beta = tf.matmul(tf.linalg.inv(self.moving_conv2+self.diag_offset*tf.eye(conv.shape[1])),self.moving_convX) ## calculate beta for confound regression
+
+            beta = tf.matmul(tf.linalg.inv(tf.matmul(tf.transpose(conv),conv)+self.diag_offset*tf.eye(conv.shape[1])),tf.matmul(tf.transpose(conv),X))
+            #beta = tf.matmul(tf.linalg.inv(self.moving_conv2+self.diag_offset*tf.eye(conv.shape[1])),self.moving_convX) ## calculate beta for confound regression
   
             X_out = tf.subtract(X,tf.matmul(conv, beta)) ## remove confounds
 
@@ -94,6 +96,7 @@ class ConfoundLayer(tf.keras.layers.Layer):
              
             beta = tf.matmul(tf.linalg.inv(self.moving_conv2+self.diag_offset*tf.eye(conv.shape[1])),self.moving_convX) ## calculate beta for confound regression
             X_out = tf.subtract(X,tf.matmul(conv, beta)) ## remove confounds
+            #X_out = X
 
         return X_out
    
