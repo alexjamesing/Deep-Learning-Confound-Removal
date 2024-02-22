@@ -1,5 +1,5 @@
 <p align="center">
-<img src="/Users/ing/Documents/Documents_mac_korbel33/GitHub/DLVPM/DLVPM/confound_layer_github/confound_removal_logo.webp" width="300" height="300">
+<img src="confound_removal_logo.webp" width="300" height="300">
 </p>
 
 **About Package**
