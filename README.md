@@ -18,6 +18,9 @@ Once the layer is imported, it can be added to a model in the normal way:
 
 ~~~
 
+import tensorflow as tf
+from deepcleaner.ConfoundLayer import ConfoundLayer 
+
 n_samples = 100
 
 # Define the model
