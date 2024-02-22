@@ -4,7 +4,7 @@
 
 **About Package**
 
-This Python module introduces a custom TensorFlow/Keras layer designed to orthogonalize input data with respect to a set of specified confounds. The layer ensures that the output is statistically independent of these confounds, which is particularly useful in contexts where it's crucial to control for certain variables to obtain valid and generalizable inferences from neural network models.
+This Python package introduces a custom TensorFlow/Keras layer designed to orthogonalize input data with respect to a set of specified confounds. The layer ensures that the output is statistically independent of these confounds, which is particularly useful in contexts where it's crucial to control for certain variables to obtain valid and generalizable inferences from neural network models.
 
 **Features**
 
