@@ -62,7 +62,7 @@ Note that tensorflow currently supports python 3.9-3.11. If you have a newer ver
 
 **Tutorial**
 
-In this tutorial, we show how the confound removal layer can be used to remove the effect of nuissance covariates in deep learning models, enhancing their accuracy, reliability, and genralisability. This layer uses the Moore-Penrose pseudo inverse to pathe confounding effects of a set of nuissance covariates. This procedure decorrelates the confounds from the output of the neural network.
+In this tutorial, we show how the confound removal layer can be used to remove the effect of nuissance covariates in deep learning models, enhancing their accuracy, reliability, and genralisability. This layer uses the Moore-Penrose pseudo inverse to the confounding effects of a set of nuissance covariates. This procedure decorrelates the confounds from the output of the neural network.
 
 **Dataset Description**
 

@@ -39,8 +39,8 @@ class ConfoundLayer(tf.keras.layers.Layer):
         self.momentum = momentum ## This is the amount of momentum that covariance matrices are subject to (see pseudo-code for more details)
         self.epsilon = epsilon ## This is the offset determined during batch normalisation
         self.diag_offset =diag_offset ## This is a offset added to the diagonal of the covariance matrix between confounds, to ensure that this matrix is invertable
-        self.batch_norm1 = tf.keras.layers.BatchNormalization()
-        self.batch_norm2 = tf.keras.layers.BatchNormalization()
+        self.batch_norm1 = tf.keras.layers.BatchNormalization(epsilon=self.epsilon, momentum=self.momentum)
+        self.batch_norm2 = tf.keras.layers.BatchNormalization(epsilon=self.epsilon, momentum=self.momentum)
         self.run=tf.Variable(run,trainable=False)
 
     def build(self, input_shape):
